@@ -1,7 +1,12 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TestController;
+use App\Http\Controllers\ContactsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +18,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/test/func',[TestController::class,'func']);{
     return view('welcome');
-});
+};
+
+        //入力フォームページ
+        Route::get('/contact',[ContactsController::class,'index'])->name('contact.index');
+        //確認フォームページ
+        Route::post('/contact/confirm',[ContactsController::class,'confirm'])->name('contact.confirm');
+        //送信完了ページ
+        Route::post('/contact/thanks',[ContactsController::claas,'send'])->name('contact.send');
