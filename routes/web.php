@@ -18,13 +18,13 @@ use App\Http\Controllers\ContactsController;
 |
 */
 
-Route::get('/test/func',[TestController::class,'func']);{
+/*Route::get('/test/func',[TestController::class,'func']);{
     return view('welcome');
-};
+};*/
 
         //入力フォームページ
         Route::get('/contact',[ContactsController::class,'index'])->name('contact.index');
         //確認フォームページ
         Route::post('/contact/confirm',[ContactsController::class,'confirm'])->name('contact.confirm');
         //送信完了ページ
-        Route::post('/contact/thanks',[ContactsController::claas,'send'])->name('contact.send');
+        Route::post('/contact/thanks',[ContactsController::class,'send'])->name('contact.send');
