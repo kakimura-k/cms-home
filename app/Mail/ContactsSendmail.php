@@ -12,9 +12,7 @@ class ContactsSendmail extends Mailable
     use Queueable, SerializesModels;
 
     // プロパティを定義
-    private $email;
-    private $title;
-    private $body;
+    private $company,$name,$tel,$email,$birth_date,$gender,$occupation,$body;
 
     /**
      * Create a new message instance.
@@ -24,8 +22,13 @@ class ContactsSendmail extends Mailable
     public function __construct( $inputs )
     {
         // コンストラクタでプロパティに値を格納
+        $this->company = $inputs['company'];
+        $this->name = $inputs['name'];
+        $this->tel = $inputs['tel'];
         $this->email = $inputs['email'];
-        $this->title = $inputs['title'];
+        $this->birth_date = $inputs['birth_date'];
+        $this->gender = $inputs['gender'];
+        $this->occupation = $inputs['occupation'];
         $this->body = $inputs['body'];
     }
 
@@ -41,8 +44,13 @@ class ContactsSendmail extends Mailable
                 ->subject('自動送信メール')
                 ->view('contact.mail')
                 ->with([
+                'company' => $this->company,
+                'name' => $this->name,
+                'tel' => $this->tel,
                 'email' => $this->email,
-                'title' => $this->title,
+                'birth_date' => $this->birth_date,
+                'gender' => $this->gender,
+                'occupation' => $this->occupation,
                 'body' => $this->body,
                 ]);
     }

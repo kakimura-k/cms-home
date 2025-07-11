@@ -6,14 +6,20 @@ use App\Http\Controllers\Controller;
 use App\Mail\ContactsSendMail;
 use Illuminate\Http\Request;
 
+
 class ContactsController extends Controller
 {
     public function send(Request $request)
     {
         // バリデーション
         $request->validate([
+        'company' => 'required',
+        'name' => 'required',
+        'tel' => 'required',
         'email' => 'required|email',
-        'title' => 'required',
+        'birth_date' => 'required',
+        'gender' => 'required',
+        'occupation' => 'required',
         'body' => 'required'
       ]);
     
@@ -37,7 +43,7 @@ class ContactsController extends Controller
             // ユーザにメールを送信
             \Mail::to($inputs['email'])->send(new ContactsSendmail($inputs));
             // 自分にメールを送信
-            \Mail::to('自分のメールアドレス')->send(new ContactsSendmail($inputs));
+            \Mail::to('lancer333.333.333@gmail.com')->send(new ContactsSendmail($inputs));
     
             // 二重送信対策のためトークンを再発行
             $request->session()->regenerateToken();
@@ -55,14 +61,19 @@ class ContactsController extends Controller
 
     public function confirm(Request $request)
     {
+        // dd($request);
         // バリデーションルールを定義
         // 引っかかるとエラーを起こしてくれる
         $request->validate([
+        'company' => 'required',           
+        'name' => 'required',
+        'tel' => 'required',
         'email' => 'required|email',
-        'title' => 'required',
+        'birth_date' => 'required',
+        'gender' => 'required',
+        'occupation' => 'required',
         'body' => 'required',
         ]);
-    
         // フォームからの入力値を全て取得
         $inputs = $request->all();
     
